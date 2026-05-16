@@ -1,64 +1,404 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blogs | Duck’s Mathematics</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics 101 - Duck's Mathematics</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --neon-blue: #38bdf8;
+            --price-orange: #f97316;
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  
-  <style>
-    /* Subtle fade-in animation for the coming soon message */
-    .coming-soon {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 250px;
-      text-align: center;
-      color: #ffffff;
-      opacity: 0;
-      animation: fadeIn 2s forwards;
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
 
-    .coming-soon h2 {
-      font-size: 1.8em;
-      margin-bottom: 15px;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .coming-soon p {
-      font-size: 1.1em;
-      line-height: 1.6;
-      max-width: 500px;
-      color: #eaf6ff;
-    }
+        body {
+            background-color: #020617;
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 90px;
+            display: flex;
+            justify-content: center;
+        }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+        .phone-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--bg-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hero Image Container */
+        .image-container {
+            position: relative;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: linear-gradient(transparent, var(--bg-dark));
+        }
+
+        /* Content Section */
+        .main-content {
+            padding: 24px 20px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--neon-blue);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        /* Premium Optimized Subtitle Heading */
+        .subtitle {
+            font-size: 18px;
+            color: var(--neon-blue);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 24px;
+            padding-left: 12px;
+            border-left: 4px solid var(--neon-blue);
+            background: linear-gradient(90deg, rgba(56, 189, 248, 0.08) 0%, transparent 100%);
+            padding-top: 6px;
+            padding-bottom: 6px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .paragraph {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        /* Bento-style Grid */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .meta-card {
+            background: var(--surface-dark);
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meta-card .label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .meta-card .value {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* --- 2D METALLIC SHINE EFFECT --- */
+        .meta-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                rgba(255, 255, 255, 0) 0%, 
+                rgba(255, 255, 255, 0.25) 50%, 
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+        }
+
+        .shine-active::before {
+            animation: modern2DShine 0.8s ease-out;
+        }
+
+        @keyframes modern2DShine {
+            100% {
+                left: 150%;
+            }
+        }
+
+        /* Syllabus Section */
+        .section-header {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            scroll-margin-top: 20px;
+        }
+
+        .section-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .topic-list {
+            list-style: none;
+            margin-bottom: 35px;
+        }
+
+        .topic-item {
+            background: rgba(30, 41, 59, 0.5);
+            padding: 14px 16px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .topic-number {
+            background: var(--accent-gradient);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 14px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Instructor Premium Card */
+        .instructor-panel {
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.1), transparent), var(--surface-dark);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .ins-tag {
+            font-size: 10px;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .ins-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .ins-company {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Premium Fixed Bottom Bar */
+        .action-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            max-width: 480px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .price-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-lbl {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .price-val {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--price-orange);
+        }
+
+        .cta-btn {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.97);
+        }
+    </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="videos.html">Videos</a>
-  <a href="blog.html" class="active">Blogs</a>
-</nav>
+<div class="phone-container">
+    
+    <!-- Hero Header -->
+    <div class="image-container">
+        <img src="https://i.ibb.co.com/6cT8r0F1/20260516-170927.jpg" alt="Mathematics 101">
+    </div>
 
-<section class="glass-box">
-  
-  <div class="coming-soon">
-    <h2>Blogs Coming Soon</h2>
-    <p>We are preparing some amazing physics and mathematics content for you. Stay tuned. exciting blogs will appear here shortly!</p>
-  </div>
-</section>
+    <!-- Main Content -->
+    <div class="main-content">
+        <span class="badge">LIVE & RECORDED BATCH</span>
+        <h1 class="title">Mathematics 101</h1>
+        <div class="subtitle">ফিজিক্সের জন্য প্রয়োজনীয় বেসিক ম্যাথস এক কোর্সেই!</div>
+        
+        <p class="paragraph">
+            যারা সদ্য এসএসসি পরীক্ষা দিয়েছো এবং কলেজে উঠতে যাচ্ছো, তাদের জন্য পদার্থবিজ্ঞানের ভিত্তি মজবুত করতে এই ম্যাথমেটিক্স জানা অত্যন্ত গুরুত্বপূর্ণ। এছাড়াও যারা ফিজিক্স অলিম্পিয়াড করবে কিংবা ফিজিক্স গভীরভাবে বুঝতে ও শিখতে চায় তাদের জন্যও এই কোর্সটি উপযোগী।
+        </p>
 
-<footer>
-  <p>© Duck's Mathematics since 2025 | Learn Your Way</p>
-</footer>
+        <!-- Bento Grid Info -->
+        <div class="section-header" id="course-details">কোর্স বিবরণী</div>
+        <div class="meta-grid">
+            <div class="meta-card">
+                <span class="label">মোট ক্লাস</span>
+                <span class="value">১৭টি</span>
+            </div>
+            <div class="meta-card">
+                <span class="label">কোর্স ফরম্যাট</span>
+                <span class="value">রেকর্ডেড</span>
+            </div>
+            <div class="meta-card">
+                <span class="label">ভ্যালিডিটি</span>
+                <span class="value">২.৫ মাস</span>
+            </div>
+            <!-- Target Card for 2D Shine -->
+            <div class="meta-card" id="batch-start-card">
+                <span class="label">কোর্স শুরু</span>
+                <span class="value" style="color: #ffffff;">৫ সেপ্টেম্বর ২০২৬</span>
+            </div>
+        </div>
+
+        <!-- Syllabus Items -->
+        <div class="section-header">কোর্সের সিলেবাস</div>
+        <ul class="topic-list">
+            <li class="topic-item"><span class="topic-number">১</span> সমীকরণ, ফাংশন ও গ্রাফ</li>
+            <li class="topic-item"><span class="topic-number">২</span> স্থানাঙ্ক জ্যামিতি</li>
+            <li class="topic-item"><span class="topic-number">৩</span> ভেক্টর</li>
+            <li class="topic-item"><span class="topic-number">৪</span> বিপরীত ত্রিকোণমিতি</li>
+            <li class="topic-item"><span class="topic-number">৫</span> কলনবিদ্যা — অন্তরীকরণ ও যোগীকরণ</li>
+        </ul>
+
+        <!-- Instructor Panel -->
+        <div class="instructor-panel">
+            <span class="ins-tag">Course Instructor</span>
+            <span class="ins-name">M. A. Hamza</span>
+            <span class="ins-company">Duck's Mathematics</span>
+        </div>
+    </div>
+
+    <!-- Floating Sticky Action Bar -->
+    <div class="action-bar">
+        <div class="price-box">
+            <span class="price-lbl">টোটাল কোর্স ফি</span>
+            <span class="price-val">২১০০৳</span>
+        </div>
+        <button class="cta-btn" onclick="trigger2DShine()">Enrol Now</button>
+    </div>
+
+</div>
+
+<script>
+function trigger2DShine() {
+    // 1. Scroll safely to course details block
+    document.getElementById('course-details').scrollIntoView({ behavior: 'smooth' });
+    
+    // 2. Select the specific batch date element
+    const batchCard = document.getElementById('batch-start-card');
+    
+    // Reset structural state class
+    batchCard.classList.remove('shine-active');
+    
+    // Reflow standard clean trigger
+    void batchCard.offsetWidth; 
+    
+    // 3. Fire the 2D Sweep animation layer
+    batchCard.classList.add('shine-active');
+}
+</script>
 
 </body>
 </html>
